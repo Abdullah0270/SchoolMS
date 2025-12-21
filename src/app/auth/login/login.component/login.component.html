@@ -1,0 +1,80 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg border-0" style="max-width: 420px; width: 100%;">
+
+    <div class="card-body p-4">
+
+      <h3 class="text-center mb-4 fw-bold">Login</h3>
+
+      <!-- 🔹 Show login form only if login check complete -->
+      <ng-container *ngIf="!isCheckingLogin; else checking">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="Enter email"
+              [class.is-invalid]="email?.touched && email?.invalid"
+            />
+            <div class="invalid-feedback">
+              <span *ngIf="email?.errors?.['required']">Email is required</span>
+              <span *ngIf="email?.errors?.['email']">Invalid email format</span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              placeholder="Enter password"
+              [class.is-invalid]="password?.touched && password?.invalid"
+            />
+            <div class="invalid-feedback">
+              Password is required
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
+
+        </form>
+
+        <!-- API Error -->
+        <div *ngIf="error" class="alert alert-danger mt-3 text-center">
+          {{ error }}
+        </div>
+
+        <!-- Signup Link -->
+        <div class="text-center mt-3">
+          <span class="text-muted">Don’t have an account?</span>
+          <a [routerLink]="['/signup']" class="fw-semibold text-decoration-none">
+            Signup
+          </a>
+        </div>
+      </ng-container>
+
+      <!-- 🔹 Optional loader while checking login -->
+      <ng-template #checking>
+        <div class="text-center py-4">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Checking login...</span>
+          </div>
+          <div class="mt-2 text-muted">Checking login status...</div>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>

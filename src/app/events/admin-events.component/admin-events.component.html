@@ -1,0 +1,105 @@
+<!-- FULL SCREEN LOADER -->
+@if (loadingEvents) {
+  <div class="loader-backdrop">
+    <div class="spinner-border text-primary loader-spinner"></div>
+  </div>
+}
+
+<div class="container my-5">
+
+  <h3 class="fw-bold mb-4">Events</h3>
+
+  <!-- ADD EVENT -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="addEvent()">
+        <div class="row g-3">
+
+          <div class="col-md-4">
+            <input
+              class="form-control"
+              placeholder="Title"
+              formControlName="title"
+              [disabled]="loadingEvents"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <input
+              class="form-control"
+              placeholder="Description"
+              formControlName="description"
+              [disabled]="loadingEvents"
+            />
+          </div>
+
+          <div class="col-md-3">
+            <input
+              type="date"
+              class="form-control"
+              formControlName="eventDate"
+              [disabled]="loadingEvents"
+            />
+          </div>
+
+          <div class="col-md-1">
+            <button
+              class="btn btn-primary w-100"
+              type="submit"
+              [disabled]="form.invalid || loadingEvents"
+            >
+              Add
+            </button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EVENTS TABLE -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (event of events; track event.id) {
+            <tr>
+              <td>{{ event.title }}</td>
+              <td>{{ event.description }}</td>
+              <td>{{ event.eventDate | date:'mediumDate' }}</td>
+              <td class="text-center">
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="deleteEvent(event.id)"
+                  [disabled]="loadingEvents"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+
+          @if (!loadingEvents && events.length === 0) {
+            <tr>
+              <td colspan="4" class="text-center text-muted">
+                No events found
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

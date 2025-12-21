@@ -1,0 +1,41 @@
+<div class="admin-container">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+  <li>
+    <a routerLink="/admin/dashboard" routerLinkActive="active-link">Dashboard</a>
+  </li>
+  <li>
+    <a routerLink="/admin/students" routerLinkActive="active-link">Students</a>
+  </li>
+  <li>
+    <a routerLink="/admin/teachers" routerLinkActive="active-link">Teachers</a>
+  </li>
+  <li>
+    <a routerLink="/admin/events" routerLinkActive="active-link">Events</a>
+  </li>
+  <li>
+    <a routerLink="/admin/attendance" routerLinkActive="active-link">Attendance</a>
+  </li>
+</ul>
+
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    
+    <!-- Navbar -->
+    <header class="navbar">
+      <span>Welcome, Admin</span>
+      <button (click)="logout()">Logout</button>
+    </header>
+
+    <!-- Page Content -->
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+    
+  </div>
+</div>
