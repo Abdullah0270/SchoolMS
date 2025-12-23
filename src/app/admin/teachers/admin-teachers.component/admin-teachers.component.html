@@ -1,0 +1,130 @@
+@if (loading) {
+  <div class="loader-backdrop">
+    <div class="spinner-border text-primary loader-spinner"></div>
+  </div>
+}
+
+<div class="container my-5">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold mb-0">Teachers</h3>
+  </div>
+
+  <!-- Add Teacher -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white fw-semibold">
+      Add Teacher
+    </div>
+
+    <div class="card-body">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="addTeacher()"
+        class="row g-3 align-items-end"
+      >
+
+        <div class="col-md-3">
+          <label class="form-label">Full Name</label>
+          <input
+            class="form-control"
+            placeholder="Full Name"
+            formControlName="fullName"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Email</label>
+          <input
+            class="form-control"
+            placeholder="Email"
+            formControlName="email"
+          />
+        </div>
+
+        <div class="col-md-3">
+          <label class="form-label">Course</label>
+          <select class="form-select" formControlName="courseId">
+            <option value="">Select Course</option>
+            @for (c of courses; track c.id) {
+              <option [ngValue]="c.id">{{ c.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label">Phone</label>
+          <input
+            class="form-control"
+            placeholder="Phone"
+            formControlName="phone"
+          />
+        </div>
+
+        <div class="col-md-1">
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="submitting || form.invalid"
+          >
+            @if (submitting) {
+              <span class="spinner-border spinner-border-sm"></span>
+            } @else {
+              Add
+            }
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- Teachers Table -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-white fw-semibold">
+      Teachers List
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-hover mb-0 align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Phone</th>
+            <th class="text-center" style="width: 100px;">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (t of teachers; track t.id) {
+            <tr>
+              <td>{{ t.fullName }}</td>
+              <td>{{ t.email }}</td>
+              <td>{{ t.course?.name }}</td>
+              <td>{{ t.phone }}</td>
+              <td class="text-center">
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="deleteTeacher(t.id)"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+
+          @if (teachers.length === 0) {
+            <tr>
+              <td colspan="5" class="text-center text-muted py-4">
+                No teachers found
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

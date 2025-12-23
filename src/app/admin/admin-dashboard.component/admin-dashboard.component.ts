@@ -11,11 +11,10 @@ import { RouterLink } from '@angular/router';
 })
 export class AdminDashboardComponent {
   
-  // Dummy stats, baad me API se replace karenge
   stats = [
-    { title: 'Students', count: 120, icon: '👨‍🎓', link: '/admin/students' },
-    { title: 'Teachers', count: 15, icon: '👩‍🏫', link: '/admin/teachers' },
-    { title: 'Events', count: 8, icon: '📅', link: '/admin/events' },
-    { title: 'Attendance', count: 100, icon: '✅', link: '/admin/attendance' },
+    { title: 'Students', icon: '👨‍🎓', link: '/admin/students' },
+    { title: 'Teachers', icon: '👩‍🏫', link: '/admin/teachers' },
+    { title: 'Events', icon: '📅', link: '/admin/events' },
+    { title: 'Courses', icon: '📚', link: '/admin/courses' },
   ];
 }

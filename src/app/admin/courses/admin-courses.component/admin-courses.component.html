@@ -1,0 +1,86 @@
+@if (loading) {
+  <div class="loader-backdrop">
+    <div class="spinner-border text-primary"></div>
+  </div>
+}
+
+<div class="container my-4">
+
+  <h3 class="mb-3">Courses</h3>
+
+  <!-- Add Course Form -->
+  <form [formGroup]="form" (ngSubmit)="addCourse()" class="row g-3 mb-4">
+
+    <div class="col-md-3">
+      <input class="form-control" placeholder="Course Name" formControlName="name">
+    </div>
+
+    <div class="col-md-2">
+      <input class="form-control" placeholder="Code" formControlName="code">
+    </div>
+
+    <div class="col-md-2">
+      <input type="number" class="form-control" placeholder="Credit Hours" formControlName="creditHours">
+    </div>
+
+    <div class="col-md-2 d-flex align-items-center">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" formControlName="isActive">
+        <label class="form-check-label">Active</label>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <button class="btn btn-primary w-100" [disabled]="submitting || form.invalid">
+        @if (submitting) {
+          <span class="spinner-border spinner-border-sm"></span>
+        } @else {
+          Add Course
+        }
+      </button>
+    </div>
+
+  </form>
+
+  <!-- Courses Table -->
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Credits</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (c of courses; track c.id) {
+        <tr>
+          <td>{{ c.name }}</td>
+          <td>{{ c.code }}</td>
+          <td>{{ c.creditHours }}</td>
+          <td>
+            <span class="badge" [class.bg-success]="c.isActive" [class.bg-secondary]="!c.isActive">
+              {{ c.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="deleteCourse(c.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+
+      @if (courses.length === 0 && !loading) {
+        <tr>
+          <td colspan="5" class="text-center text-muted">
+            No courses found
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>

@@ -1,1 +1,69 @@
-/* You can add global styles to this file, and also import other style files */
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* LAYOUT */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #14af9e;
+  color: #000000;
+  padding: 20px;
+}
+
+.sidebar .title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #14af9e;
+  margin-bottom: 24px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background: #000000;
+}
+
+.sidebar a.active {
+  background: #14af9e;
+  color: rgb(0, 0, 0);
+}
+
+/* RIGHT SIDE */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  height: 56px;
+  background: rgb(0, 0, 0);
+  border-bottom: 1px solid #000000;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* CONTENT */
+.content {
+  padding: 24px;
+  background: #f1f5f9;
+  min-height: calc(100vh - 56px);
+}

@@ -1,10 +1,9 @@
-<h1>Admin Dashboard</h1>
+<h1 style="font-size: 24px; font-weight: bold; color: #012521;">Admin Dashboard</h1>
 
 <div class="cards-container">
   <div *ngFor="let stat of stats" class="card" [routerLink]="stat.link">
     <div class="card-icon">{{ stat.icon }}</div>
-    <div class="card-info">
-      <h2>{{ stat.count }}</h2>
+    <div class="card-info" >
       <p>{{ stat.title }}</p>
     </div>
   </div>

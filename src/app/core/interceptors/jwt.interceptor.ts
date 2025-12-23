@@ -5,15 +5,6 @@ import { TokenService } from '../services/token.service';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   const tokenService = inject(TokenService);
-//   const token = tokenService.get();
-
-//   if (token) {
-//     req = req.clone({
-//       setHeaders: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     });
-//   }
 
 const token = tokenService.get();
 
